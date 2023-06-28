@@ -1,0 +1,36 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock head %}
+
+{% block body %}
+
+{% include 'navbar.html' %}
+<div>
+  <form method="POST">
+    {% csrf_token %}
+    {% if form.errors %}
+    <div role="alert">
+      {% for field in form %}
+      {% for error in field.errors %}
+      {{error}}
+      {%endfor %}
+      {% endfor %}
+    </div>
+    {% endif %}
+    <h2>Please sign in</h2>
+    <label for="inputEmail">Email address</label>
+    <input name="email" type="email" id="inputEmail" placeholder="Email address" required autofocus />
+    <label for="inputPassword">Password</label>
+    <input name="password" type="password" id="inputPassword" placeholder="Password" required />
+    <button type="submit">
+      Sign in
+    </button>
+  </form>
+  <a href="{% url 'signup' %}">Register</a>
+</div>
+{% endblock body %}

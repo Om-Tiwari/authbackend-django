@@ -1,0 +1,25 @@
+{% block nav %}
+<nav>
+  <a href="/">APP_NAME</a>
+  <button type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+    aria-label="Toggle navigation">btn
+    <span></span>
+  </button>
+  <div>
+    <ul>
+      {% if request.user.is_authenticated %}
+      <li>
+        <a href="{% url 'signout' %}">Logout</a>
+      </li>
+      {% else %}
+      <li>
+        <a href="{% url 'signin' %}">Login</a>
+      </li>
+      <li>
+        <a href="{% url 'signup' %}">Register</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+{% endblock nav %}

@@ -1,0 +1,45 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock head %}
+
+{% block body %}
+
+{% include 'navbar.html' %}
+
+<div>
+  <form method="POST">
+    {% csrf_token %} {% if form.errors %}
+    <div role="alert">
+      {% for field in form %} {% for error in field.errors %}
+      {{error}} {% endfor %} {% endfor %}
+    </div>
+    {% endif %}
+    <div>
+      <label for="username">Email</label>
+      {{form.email}}
+    </div>
+    <div>
+      <label for="password1">Password</label>
+      {{form.password1}}
+    </div>
+    <div>
+      <label for="password2">Confirm Password</label>
+      {{form.password2}}
+    </div>
+    <div ustify-content-center mt-3 login_container">
+      <input type="submit" value="Sign Up" />
+    </div>
+  </form>
+  <a href="{% url 'signin' %}">Sign in</a>
+  <script>
+    var form_fields = document.getElementsByTagName("input");
+    form_fields[1].placeholder = "Email";
+    form_fields[2].placeholder = "Enter password";
+    form_fields[3].placeholder = "Re-enter Password";
+  </script>
+  {% endblock body %}

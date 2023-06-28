@@ -1,0 +1,8 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}{{ title }}{% endblock title %}
+{% block body %}
+{% include 'navbar.html' %}
+<h1>Landing page</h1>
+<a href="{% url 'index' %}">DASHBOARD</a>
+{% endblock body %}
